@@ -1,0 +1,26 @@
+Package: TopoRNet
+Type: Package
+Title: Analysis and Visualization of Topology Representing Networks
+Version: 1.0
+Date: 2020-04-25
+Author: Josh Taylor
+Maintainer: Josh Taylor <josh@somdisco.com>
+Description: TopoRNet provides access to the CONNvis visualization, Topology Preservation metrics, and pruning for Topology Representing Networks.  
+License: GPL (>= 2)
+Imports: 
+    Rcpp (>= 1.0.1), 
+    igraph, 
+    dplyr, 
+    Rdpack, 
+    ggplot2, 
+    changepoint, 
+    ggrepel
+LinkingTo: Rcpp, RcppArmadillo, RcppParallel
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown, 
+    SOMDisco
+VignetteBuilder: knitr
+RdMacros: Rdpack
+LazyData: true

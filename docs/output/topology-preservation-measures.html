@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Topology Preservation Measures | TopoRNet</title>
+  <meta name="description" content="Chapter 5 Topology Preservation Measures | TopoRNet" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Topology Preservation Measures | TopoRNet" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Topology Preservation Measures | TopoRNet" />
+  
+  
+  
+
+<meta name="author" content="Josh Taylor" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pruning.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a></li>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
+<li class="chapter" data-level="3" data-path="visualizations.html"><a href="visualizations.html"><i class="fa fa-check"></i><b>3</b> Visualizations</a><ul>
+<li class="chapter" data-level="3.1" data-path="visualizations.html"><a href="visualizations.html#topoview"><i class="fa fa-check"></i><b>3.1</b> TopoView</a></li>
+<li class="chapter" data-level="3.2" data-path="visualizations.html"><a href="visualizations.html#connvis"><i class="fa fa-check"></i><b>3.2</b> CONNvis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pruning.html"><a href="pruning.html"><i class="fa fa-check"></i><b>4</b> Pruning</a><ul>
+<li class="chapter" data-level="4.1" data-path="pruning.html"><a href="pruning.html#grid-pruning"><i class="fa fa-check"></i><b>4.1</b> Grid Pruning</a></li>
+<li class="chapter" data-level="4.2" data-path="pruning.html"><a href="pruning.html#dm-prune"><i class="fa fa-check"></i><b>4.2</b> DM-Prune</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html"><i class="fa fa-check"></i><b>5</b> Topology Preservation Measures</a><ul>
+<li class="chapter" data-level="5.1" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-product"><i class="fa fa-check"></i><b>5.1</b> Topographic Product</a></li>
+<li class="chapter" data-level="5.2" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#differential-topographic-function"><i class="fa fa-check"></i><b>5.2</b> Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.3" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#weighted-differential-topographic-function"><i class="fa fa-check"></i><b>5.3</b> Weighted Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.4" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-function"><i class="fa fa-check"></i><b>5.4</b> Topographic Function</a></li>
+<li class="chapter" data-level="5.5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#calculating-tpms-with-topornet"><i class="fa fa-check"></i><b>5.5</b> Calculating TPMs with TopoRNet</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TopoRNet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="topology-preservation-measures" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Topology Preservation Measures</h1>
+<p><em>Topology Preservation</em> for TRN’s with natural output space topology is complicated-sounding terminology for what is a fairly simple concept: the TRN should represent adjacencies in its input space by adjacencies in its output space <em>faithfully</em>. Any deviations from this are known as <strong>topology violations</strong>. Put another way, if two prototypes <span class="math inline">\(w_i\)</span> and <span class="math inline">\(w_j\)</span> are neighbors in <span class="math inline">\(\mathcal{M}\)</span> (e.g., <span class="math inline">\(\exists\)</span> an edge <span class="math inline">\(CADJ_{ij} &gt; 0\)</span>), their corresponding neurons <span class="math inline">\(\nu_i\)</span> and <span class="math inline">\(\nu_j\)</span> should <strong>also be adjacenct</strong> according to the topology of the output space <span class="math inline">\(\mathcal{L}\)</span>. For SOM’s <span class="math inline">\(\mathcal{L}\)</span> is obviously the lattice, whose topology is defined by the rigid rectangular or hexagonal grid structure. Measuring topology (violation) preservation is, then, equivalent to counting the number of neighbor relationships on <span class="math inline">\(\mathcal{M}\)</span> that are <strong>(not) preserved</strong> by the TRN’s representation on <span class="math inline">\(\mathcal{L}\)</span>. To motivate this consider the following three cases to which we will return throughout this section:</p>
+<div class="figure"><span id="fig:unnamed-chunk-30"></span>
+<img src="figs/tp_x2_grid.png" alt="Examples of 1-d TRN" width="33%" /><img src="figs/tp_x2_chain.png" alt="Examples of 1-d TRN" width="33%" /><img src="figs/tp_cloud_chain.png" alt="Examples of 1-d TRN" width="33%" />
+<p class="caption">
+Figure 5.1: Examples of 1-d TRN
+</p>
+</div>
+<p>Each panel depicts a sample of observations in 2-d input space (gray points) and the prototypes of a SOM trained on the sample (red points). The SOM lattice adjacencies (output space topology) are shown as red edges. The different effective dimensionalities of both input and output space in the above cases result in various types of topology violation:</p>
+<ul>
+<li><strong>Backward Topology Violations</strong> (left panel, case “A”)
+At left the sample data lie along a 1-d manifold <span class="math inline">\(\subset \mathbb{R}^2\)</span> but were learned by a SOM equipped with a 2-d rectangular output lattice. The dimension mismatch between these two spaces (<span class="math inline">\(dim(\mathcal{L}) &gt; dim(\mathcal{M})\)</span>) has caused the lattice to <strong>fold</strong> onto <span class="math inline">\(\mathcal{M}\)</span> such that neighboring lattice neurons are connected to prototypes which are <em>not</em> neighboring in <span class="math inline">\(\mathcal{M}\)</span> (as gauged by eye for now, this will be formalized below). This is known as a <strong>backward</strong> topology violation.<br />
+</li>
+<li><strong>No Topology Violations</strong> (middle panel, case “B”)
+At middle the same sample data as in case A were learned by an SOM with a 1-d lattice (or chain of neurons). Since <span class="math inline">\(dim(\mathcal{L}) = dim(\mathcal{M})\)</span> we have no topology violations; the lattice adjacencies correspond perfectly to the adjacencies of the prototypes in <span class="math inline">\(\mathcal{M}\)</span>.<br />
+</li>
+<li><strong>Forward Topology Violations</strong> (right panel, case “C”)
+At right fully 2-dimensional sample data were learned by a SOM with a 1-d output space. This dimension mismatch (<span class="math inline">\(dim(\mathcal{L}) &lt; dim(\mathcal{M})\)</span>) has caused <span class="math inline">\(\mathcal{M}\)</span> to fold onto <span class="math inline">\(\mathcal{L}\)</span> (i.e., there are neighboring prototypes in <span class="math inline">\(\mathcal{M}\)</span> that are not neighbors on <span class="math inline">\(\mathcal{L}\)</span>), which is typically the case with SOM learning.</li>
+</ul>
+<p>The measures introduced in this section differ only in <em>how</em> and with <em>what granularity</em> they are sensitive to the various types of topology violations described above (i.e., by weighting or normalizing the counting of violations in various ways). We study a map’s overall topology preservation and instances of topology violations in order to:</p>
+<ul>
+<li>monitor the progress of manifold learning (i.e., SOM training should persist until there is suitable representation of <span class="math inline">\(\mathcal{M}\)</span>’s topology on <span class="math inline">\(\mathcal{L}\)</span>)</li>
+<li>asses poor learning parameterizations (e.g., severely mis-specified learning rates governing SOM training)</li>
+<li>ensure <em>correct</em> (as possible) topological inference from the TRN (i.e., correctly identifying true cluster structure in the data, and avoiding the identification of spurious structure that might be indicated by violations)</li>
+<li>diagnose severe dimensionality conflicts between the TRN’s input and output space topologies.</li>
+</ul>
+<p>The remainder of this reviews several leading measures of topology preservation, which requires us to first clarify some terminology. Let:</p>
+<ul>
+<li><span class="math inline">\(\mathcal{M}\)</span> be the data manifold as a (possible) subset of <span class="math inline">\(\mathbb{R}^d\)</span> (the input space)</li>
+<li><span class="math inline">\(\mathcal{L}\)</span> be the output space (<span class="math inline">\(\mathbb{R}^2\)</span> with an embedded lattice structure for SOMs)</li>
+<li><span class="math inline">\(d_a^b(i,j)\)</span> be the distance defined by <span class="math inline">\(a\)</span> measured on space <span class="math inline">\(b\)</span> between vertices <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> of the TRN.<br />
+<span class="math inline">\(b \in \{\mathcal{M},\mathcal{L}\}\)</span> defines the space in question. <span class="math inline">\(a \in \{E,G\}\)</span> where <span class="math inline">\(E\)</span> is Euclidean distance and <span class="math inline">\(G\)</span> is the geodesic distance on the corresponding graph inherent to space <span class="math inline">\(b\)</span> (e.g., CADJ on <span class="math inline">\(\mathcal{M}\)</span> and the lattice for <span class="math inline">\(\mathcal{L}\)</span>).</li>
+<li><span class="math inline">\(\eta(i,k,a,b)\)</span> return the <span class="math inline">\(k\)</span>-th nearest neighbor of vertex <span class="math inline">\(i\)</span> in space <span class="math inline">\(b\)</span> according to distance <span class="math inline">\(a\)</span>.</li>
+</ul>
+<div id="topographic-product" class="section level2">
+<h2><span class="header-section-number">5.1</span> Topographic Product</h2>
+<p>The Topographic Product (TP, <span class="citation">[<a href="#ref-BauerPawelzikGeisel1992" role="doc-biblioref">11</a>]</span>) provides a <em>global</em> measure of topology preservation through multiplicative accumulation of both backward and forward toplogy violations. This occurs through two intermediary calculations representing ratios of distances between equivalent quantities in our different spaces:<br />
+<span class="math display">\[ Q_1(i,k) = \frac{ d_E^{\mathcal{M}}(w_i, w_{\eta(i,k,E,\mathcal{L})}) }{ d_E^{\mathcal{M}}(w_i, w_{\eta(i,k,E,\mathcal{M})}) } \]</span>
+measures the ratio of Euclidean distances between neighboring prototypes in input space, where the different concepts of “neighbor” (according to both the output and input space topologies) define the ratio. The quantity <span class="math inline">\(Q_2\)</span> is similar, except that the Euclidean distances are calculated in output space (instead of input space):
+<span class="math display">\[ Q_2(i,k) = \frac{ d_E^{\mathcal{L}}(w_i, w_{\eta(i,k,E,\mathcal{L})}) }{ d_E^{\mathcal{L}}(w_i, w_{\eta(i,k,E,\mathcal{M})}) }. \]</span>
+<span class="math inline">\(Q_1\)</span> measures <em>backward</em> violations while <span class="math inline">\(Q_2\)</span> measures <em>forward</em> violations; if there are none then <span class="math inline">\(Q_1 = Q_2 = 1\)</span>. The ratios are combined into the quantity
+<span class="math display">\[ Q_3(i,k) = \left( \prod\limits_{l=1}^k Q_1(i,l) \times Q_2(i,l) \right)^{\frac{1}{2k}} \]</span>
+which measures the overall type of folding from prototype / neuron <span class="math inline">\(i\)</span> occuring at folding length <span class="math inline">\(k\)</span>. Aggregating this quantity over all possible folding lengths allowed for given the input / output topologies, and all neurons present in the lattice, gives the Topographic Product (TP):
+<span class="math display">\[ TP = \frac{1}{n_W(n_W-1)} \sum\limits_{i=1}^{n_W} \sum\limits_{k=1}^{n_W-1} \log(Q_3(i,k)) \]</span>
+The <strong>sign</strong> of the TP indicates the overall type of topology violations of the TRN: <span class="math inline">\(TP &gt; 0 \Rightarrow\)</span> backward violations (case A from above), <span class="math inline">\(TP \approx 0 \Rightarrow\)</span> no violations (case B above), and <span class="math inline">\(TP &lt; 0 \Rightarrow\)</span> forward violations (case C above). The Topographic Products of our three example cases are:
+<img src="TopoRNet.README_files/figure-html/ck-TP-1.png" width="672" /></p>
+<p>Case A has TP = 0.0542559, case B has TP = 0.0019023 while case C has TP = -0.0227994. Earlier we identified each as exhibiting backward, no, and forward topology violations, respectively. The Topographic Product confirms this assessment, based on sign.</p>
+</div>
+<div id="differential-topographic-function" class="section level2">
+<h2><span class="header-section-number">5.2</span> Differential Topographic Function</h2>
+<p>The geodesic distance of connections in the output (input) topology when represented on the input (output) topology is known as the <strong>folding length</strong> of a backward (forward) topology violation. By convention, backward violations have a negative folding length, while forward violations have a positive folding length. The Differential Topographic Function (DTF, <span class="citation">[<a href="#ref-ZhangMerenyi2006" role="doc-biblioref">12</a>]</span>) counts the number of violating connections at each folding length <span class="math inline">\(\in [-k,\ldots,k]\)</span>. The intermediate quantity <span class="math inline">\(f_i(k)\)</span> is defined different based on the sign of its folding length argument
+<span class="math display">\[ f_i(k) = \begin{cases} 
+\sum\limits_{j=1}^{n_W} \mathbb{1}[d_G^{\mathcal{L}}(i,j) = k \text{  and  } d_G^{\mathcal{M}}(i,j) = 1] 
+&amp; k &gt; 0 
+\\ \sum\limits_{j=1}^{n_W} \mathbb{1}[d_G^{\mathcal{L}}(i,j) = 1 \text{  and  } d_G^{\mathcal{M}}(i,j) = |k|] 
+&amp; k &lt; 0 
+\end{cases}
+\]</span>
+yielding the <span class="math inline">\(DTF\)</span>:
+<span class="math display">\[ DTF(k) = \frac{1}{n_W} \sum\limits_{i=1}^{n_W} f_i(k) \]</span>
+As folding lengths = 1 are not technically topology violations, <span class="math inline">\(DTF(k) := 0\)</span> for <span class="math inline">\(k \in [-1,0,1]\)</span>. The DTF of each of the above cases plotted over its apparent folding lengths of each of the cases above is:
+<img src="TopoRNet.README_files/figure-html/ck-DTF-1.png" width="33%" /><img src="TopoRNet.README_files/figure-html/ck-DTF-2.png" width="33%" /><img src="TopoRNet.README_files/figure-html/ck-DTF-3.png" width="33%" /></p>
+<p>The DTF again confirms the conclusion that case A exhibits (mostly) backward violations, case B exhibits no violations, and case C exhibits forward violations.</p>
+</div>
+<div id="weighted-differential-topographic-function" class="section level2">
+<h2><span class="header-section-number">5.3</span> Weighted Differential Topographic Function</h2>
+<p>If the input topology adjacencies are weighted (as is CADJ) the count of violating connections (either backward of forward) identified by the DTF can be multiplied by these weights, producing the Weighted Differential Topographic Function (WDTF, <span class="citation">[<a href="#ref-ZhangMerenyi2006" role="doc-biblioref">12</a>]</span>). Using CADJ as the input topology, the <span class="math inline">\(f\)</span> function above is modified as<br />
+<span class="math display">\[ f&#39;_i(k) =  \sum\limits_{j=1}^{n_W} CADJ_{ij} \times \mathbb{1}[d_G^{\mathcal{L}}(i,j) = k \text{  and  } d_G^{\mathcal{M}}(i,j) = 1]. 
+\]</span>
+Notice that the backward folding lengths are not captured, as CADJ only represents the forward mapping. The WDTF at each positive folding length is then
+<span class="math display">\[ WDTF(k) = \frac{1}{\sum CADJ} \sum\limits_{i=1}^{n_W} f&#39;_i(k) \]</span>
+where the normalizing constant is the sum of all edge weights in CADJ. The WDTF of our three examples confirms the conclusions of the DTF (where possible), particularly in case C. From the WDTF we also learn that some relatively strong connections are forward violating at large folding length:
+<img src="TopoRNet.README_files/figure-html/ck-WDTF-1.png" width="33%" /><img src="TopoRNet.README_files/figure-html/ck-WDTF-2.png" width="33%" /><img src="TopoRNet.README_files/figure-html/ck-WDTF-3.png" width="33%" /></p>
+</div>
+<div id="topographic-function" class="section level2">
+<h2><span class="header-section-number">5.4</span> Topographic Function</h2>
+<p>The Topographic Function (TF, <span class="citation">[<a href="#ref-VillmannDerHerrmannMartinetz1997" role="doc-biblioref">13</a>]</span>) is an integral representation of the DTF reporting, for each folding length <span class="math inline">\(k\)</span>, the cumulative violations of length larger than <span class="math inline">\(k\)</span> (whether they be backward or forward):
+<span class="math display">\[ TF(k) = \begin{cases}
+\sum\limits_{k`=k+1}^{n_W} DTF(k`) &amp; k &gt; 0 
+\\ \sum\limits_{k`=-n_W}^{k-1} DTF(k`) &amp; k &lt; 0  
+\end{cases} \]</span></p>
+<p>The TF conveys less detail than the DTF but is included in <code>TopoRNet</code> for completeness. For our three cases, the TF reports:
+<img src="TopoRNet.README_files/figure-html/ck-TF-1.png" width="33%" /><img src="TopoRNet.README_files/figure-html/ck-TF-2.png" width="33%" /><img src="TopoRNet.README_files/figure-html/ck-TF-3.png" width="33%" /></p>
+<p>Evidence of the primarily backward violations of case A and forward violations of B is (perhaps) easier to spot in the TF, but analysts generally would be more interested in knowing the <em>exact</em> length of a violating connection, not a range.</p>
+</div>
+<div id="calculating-tpms-with-topornet" class="section level2">
+<h2><span class="header-section-number">5.5</span> Calculating TPMs with TopoRNet</h2>
+<p>As the calculations of topology preservation measures introduced in this section are relatively lightweight <code>TopoRNet</code> computes them all during a call to the method <code>calc_TopoMeasures</code>, which takes as input a matrix of SOM prototype vectors in the TRN’s input space (each <span class="math inline">\(\in \mathbb{R}^d\)</span>) and a matrix of the neuron coordinates in output space (each usually in <span class="math inline">\(\in \mathbb{R}^2\)</span> for SOMs). These matrices should be ordered such that row <span class="math inline">\(i\)</span> and row <span class="math inline">\(j\)</span> give the prototype (neuron) coordinates of the vertices connected by the edge <span class="math inline">\(CADJ_{ij}\)</span>, as set during <code>initialize_TRN</code>. The input / output topologies (e.g., CADJ and the lattice adjacency for SOMs) used for the TF, DTF and WDTF calculation were stored during <code>initialize_TRN</code> and re-used for these calculations; the inputs to <code>calc_TopoMeasures</code> are needed for TP calculation. Below we compute all TPMs for our SHGR example using the information stored in the SHGR SOM object previously loaded:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="topology-preservation-measures.html#cb30-1"></a><span class="co">## Compute TPMs </span></span>
+<span id="cb30-2"><a href="topology-preservation-measures.html#cb30-2"></a><span class="co">## Inputs: SOM prototypes, (x,y) coords of neurons on lattice</span></span>
+<span id="cb30-3"><a href="topology-preservation-measures.html#cb30-3"></a>SHGR.trn<span class="op">$</span><span class="kw">calc_TopoMeasures</span>(SHGR.som<span class="op">$</span>W, SHGR.som<span class="op">$</span>nu_xy)</span>
+<span id="cb30-4"><a href="topology-preservation-measures.html#cb30-4"></a>% Computing Toplogy Preservation Measures<span class="op">:</span></span>
+<span id="cb30-5"><a href="topology-preservation-measures.html#cb30-5"></a>% <span class="op">++</span><span class="st"> </span>Topographic Product ... done</span>
+<span id="cb30-6"><a href="topology-preservation-measures.html#cb30-6"></a>% <span class="op">++</span><span class="st"> </span>CADJ Topographic Functions ... done</span>
+<span id="cb30-7"><a href="topology-preservation-measures.html#cb30-7"></a>% <span class="op">++</span><span class="st"> </span>CONN Topographic Functions ... done</span></code></pre></div>
+<p>The TP result is stored as a scalar field which can be retrieved via</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="topology-preservation-measures.html#cb31-1"></a><span class="co">## Topographic Product result</span></span>
+<span id="cb31-2"><a href="topology-preservation-measures.html#cb31-2"></a>SHGR.trn<span class="op">$</span>TopoProd</span>
+<span id="cb31-3"><a href="topology-preservation-measures.html#cb31-3"></a>% [<span class="dv">1</span>] <span class="fl">0.008247703</span></span></code></pre></div>
+<p>while the various Topographic Functions are stored as a data frame whose rows report each measure computed at the various folding lengths apparent in the mapping. Here, we extract the TFs computed using the CONN graph:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="topology-preservation-measures.html#cb32-1"></a><span class="co">## The CONN Topographic Functions </span></span>
+<span id="cb32-2"><a href="topology-preservation-measures.html#cb32-2"></a>SHGR.trn<span class="op">$</span>CONN_TopoFxns</span>
+<span id="cb32-3"><a href="topology-preservation-measures.html#cb32-3"></a>%      k          TF         DTF         WDTF</span>
+<span id="cb32-4"><a href="topology-preservation-measures.html#cb32-4"></a>% <span class="dv">1</span>  <span class="dv">-14</span> <span class="fl">0.000000000</span> <span class="fl">0.004878049</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-5"><a href="topology-preservation-measures.html#cb32-5"></a>% <span class="dv">2</span>  <span class="dv">-13</span> <span class="fl">0.004878049</span> <span class="fl">0.009756098</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-6"><a href="topology-preservation-measures.html#cb32-6"></a>% <span class="dv">3</span>  <span class="dv">-12</span> <span class="fl">0.014634146</span> <span class="fl">0.014634146</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-7"><a href="topology-preservation-measures.html#cb32-7"></a>% <span class="dv">4</span>  <span class="dv">-11</span> <span class="fl">0.029268293</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-8"><a href="topology-preservation-measures.html#cb32-8"></a>% <span class="dv">5</span>  <span class="dv">-10</span> <span class="fl">0.029268293</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-9"><a href="topology-preservation-measures.html#cb32-9"></a>% <span class="dv">6</span>   <span class="dv">-9</span> <span class="fl">0.029268293</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-10"><a href="topology-preservation-measures.html#cb32-10"></a>% <span class="dv">7</span>   <span class="dv">-8</span> <span class="fl">0.029268293</span> <span class="fl">0.004878049</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-11"><a href="topology-preservation-measures.html#cb32-11"></a>% <span class="dv">8</span>   <span class="dv">-7</span> <span class="fl">0.034146341</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-12"><a href="topology-preservation-measures.html#cb32-12"></a>% <span class="dv">9</span>   <span class="dv">-6</span> <span class="fl">0.034146341</span> <span class="fl">0.014634146</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-13"><a href="topology-preservation-measures.html#cb32-13"></a>% <span class="dv">10</span>  <span class="dv">-5</span> <span class="fl">0.048780488</span> <span class="fl">0.024390244</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-14"><a href="topology-preservation-measures.html#cb32-14"></a>% <span class="dv">11</span>  <span class="dv">-4</span> <span class="fl">0.073170732</span> <span class="fl">0.024390244</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-15"><a href="topology-preservation-measures.html#cb32-15"></a>% <span class="dv">12</span>  <span class="dv">-3</span> <span class="fl">0.097560976</span> <span class="fl">0.107317073</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-16"><a href="topology-preservation-measures.html#cb32-16"></a>% <span class="dv">13</span>  <span class="dv">-2</span> <span class="fl">0.204878049</span> <span class="fl">0.204878049</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-17"><a href="topology-preservation-measures.html#cb32-17"></a>% <span class="dv">14</span>  <span class="dv">-1</span> <span class="fl">0.409756098</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-18"><a href="topology-preservation-measures.html#cb32-18"></a>% <span class="dv">15</span>   <span class="dv">0</span> <span class="fl">2.443902439</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-19"><a href="topology-preservation-measures.html#cb32-19"></a>% <span class="dv">16</span>   <span class="dv">1</span> <span class="fl">2.034146341</span> <span class="fl">0.000000000</span> <span class="fl">0.0000000000</span></span>
+<span id="cb32-20"><a href="topology-preservation-measures.html#cb32-20"></a>% <span class="dv">17</span>   <span class="dv">2</span> <span class="fl">1.453658537</span> <span class="fl">0.580487805</span> <span class="fl">0.0142211914</span></span>
+<span id="cb32-21"><a href="topology-preservation-measures.html#cb32-21"></a>% <span class="dv">18</span>   <span class="dv">3</span> <span class="fl">1.024390244</span> <span class="fl">0.429268293</span> <span class="fl">0.0079956055</span></span>
+<span id="cb32-22"><a href="topology-preservation-measures.html#cb32-22"></a>% <span class="dv">19</span>   <span class="dv">4</span> <span class="fl">0.380487805</span> <span class="fl">0.643902439</span> <span class="fl">0.0152587891</span></span>
+<span id="cb32-23"><a href="topology-preservation-measures.html#cb32-23"></a>% <span class="dv">20</span>   <span class="dv">5</span> <span class="fl">0.073170732</span> <span class="fl">0.307317073</span> <span class="fl">0.0072021484</span></span>
+<span id="cb32-24"><a href="topology-preservation-measures.html#cb32-24"></a>% <span class="dv">21</span>   <span class="dv">6</span> <span class="fl">0.019512195</span> <span class="fl">0.053658537</span> <span class="fl">0.0014648438</span></span>
+<span id="cb32-25"><a href="topology-preservation-measures.html#cb32-25"></a>% <span class="dv">22</span>   <span class="dv">7</span> <span class="fl">0.000000000</span> <span class="fl">0.019512195</span> <span class="fl">0.0005493164</span></span></code></pre></div>
+<p><code>TopoRNet</code> also provides a visualization for the TFs computed and stored in a <code>TRN</code> object:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="topology-preservation-measures.html#cb33-1"></a>TopoRNet<span class="op">::</span><span class="kw">vis_CONN_TopoFunctions</span>(<span class="dt">TRN =</span> SHGR.trn)</span></code></pre></div>
+<p><img src="TopoRNet.README_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+
+<!-- # References {-} -->
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-BauerPawelzikGeisel1992">
+<p>[11] H.-U. Bauer, K. Pawelzik, and T. Geisel, “A topographic product for the optimization of self-organizing feature maps,” in <em>Advances in neural information processing systems 4</em>, J. E. Moody, S. J. Hanson, and R. P. Lippmann, Eds. Morgan-Kaufmann, 1992, pp. 1141–1147.</p>
+</div>
+<div id="ref-ZhangMerenyi2006">
+<p>[12] L. Zhang and E. Merényi, “Weighted differential topographic function: Arefinement of the topographic function,” in <em>In proc. 14th european symposium on artificial neural networks (esann’2006</em>, 2006, pp. 13–18.</p>
+</div>
+<div id="ref-VillmannDerHerrmannMartinetz1997">
+<p>[13] T. Villmann, R. Der, M. Herrmann, and T. M. Martinetz, “Topology preservation in self-organizing feature maps: Exact definition and measurement,” <em>IEEE Transactions on Neural Networks</em>, vol. 8, no. 2, pp. 256–266, 1997.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pruning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TopoRNet.README.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

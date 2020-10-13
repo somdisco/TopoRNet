@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Background | TopoRNet</title>
+  <meta name="description" content="Chapter 2 Background | TopoRNet" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Background | TopoRNet" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Background | TopoRNet" />
+  
+  
+  
+
+<meta name="author" content="Josh Taylor" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="installation.html"/>
+<link rel="next" href="visualizations.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a></li>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
+<li class="chapter" data-level="3" data-path="visualizations.html"><a href="visualizations.html"><i class="fa fa-check"></i><b>3</b> Visualizations</a><ul>
+<li class="chapter" data-level="3.1" data-path="visualizations.html"><a href="visualizations.html#topoview"><i class="fa fa-check"></i><b>3.1</b> TopoView</a></li>
+<li class="chapter" data-level="3.2" data-path="visualizations.html"><a href="visualizations.html#connvis"><i class="fa fa-check"></i><b>3.2</b> CONNvis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pruning.html"><a href="pruning.html"><i class="fa fa-check"></i><b>4</b> Pruning</a><ul>
+<li class="chapter" data-level="4.1" data-path="pruning.html"><a href="pruning.html#grid-pruning"><i class="fa fa-check"></i><b>4.1</b> Grid Pruning</a></li>
+<li class="chapter" data-level="4.2" data-path="pruning.html"><a href="pruning.html#dm-prune"><i class="fa fa-check"></i><b>4.2</b> DM-Prune</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html"><i class="fa fa-check"></i><b>5</b> Topology Preservation Measures</a><ul>
+<li class="chapter" data-level="5.1" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-product"><i class="fa fa-check"></i><b>5.1</b> Topographic Product</a></li>
+<li class="chapter" data-level="5.2" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#differential-topographic-function"><i class="fa fa-check"></i><b>5.2</b> Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.3" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#weighted-differential-topographic-function"><i class="fa fa-check"></i><b>5.3</b> Weighted Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.4" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-function"><i class="fa fa-check"></i><b>5.4</b> Topographic Function</a></li>
+<li class="chapter" data-level="5.5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#calculating-tpms-with-topornet"><i class="fa fa-check"></i><b>5.5</b> Calculating TPMs with TopoRNet</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TopoRNet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="background" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Background</h1>
+<p>A <strong>T</strong>opology <strong>R</strong>epresenting <strong>N</strong>etwork (or <strong>TRN</strong>, <span class="citation">[<a href="#ref-MartinetzSchulten1994" role="doc-biblioref">1</a>]</span>) arises from the quantization of a set of training data <span class="math inline">\(X = \{x_s \in \mathbb{R}^d\}_{s=1}^{nX}\)</span> by a set of <span class="math inline">\(n_W\)</span> codebook or <strong>prototype</strong> vectors
+<span class="math display">\[ W = \{ w_j \in \mathbb{R}^d \}_{j=1}^{n_W}.\]</span>
+The TRN is the graph whose vertices are the prototypes or, equivalently, their indexing set <span class="math inline">\(N = \{1, 2, \ldots, n_W \}\)</span>, and whose edges represent the <strong>topological adjacencies</strong> of the <span class="math inline">\(\{w_j\} \in \mathbb{R}^d\)</span>. <span class="math inline">\(\mathbb{R}^d\)</span> is known as the TRN’s <strong>input space</strong>, while the indexing set <span class="math inline">\(N\)</span> is known as its <strong>output space</strong>; the vector quantizer underlying the TRN maps <span class="math inline">\(\mathbb{R}^d \to N\)</span>. The most well known TRN is the Delaunay Graph <span class="math inline">\(\mathcal{D}\)</span> <span class="citation">[<a href="#ref-Delaunay1934" role="doc-biblioref">2</a>]</span> which is induced by the Voronoi tessellation <span class="citation">[<a href="#ref-Okabe00" role="doc-biblioref">3</a>]</span> of the set of prototypes <span class="math inline">\(W\)</span>. The vertices of <span class="math inline">\(\mathcal{D}\)</span> are the set <span class="math inline">\(N\)</span>; an edge connects <span class="math inline">\(j \leftrightarrow k \in N\)</span> IFF the Voronoi cells <span class="math inline">\(V_j\)</span> and <span class="math inline">\(V_k\)</span>, which are polytopes in <span class="math inline">\(\mathbb{R}^d\)</span> generated by <span class="math inline">\(w_j\)</span> and <span class="math inline">\(w_k\)</span>, respectively, intersect (i.e., share a face <span class="math inline">\(\in \mathbb{R}^{d-1}\)</span>). Other TRNs with various properties are formed as sub-graphs of <span class="math inline">\(\mathcal{D}\)</span>, such as the Gabriel Graph <span class="citation">[<a href="#ref-Gabriel1969" role="doc-biblioref">4</a>]</span> and Relative Neighbourhood Graph <span class="citation">[<a href="#ref-Toussaint1980" role="doc-biblioref">5</a>]</span>.</p>
+<p>Martinetz &amp; Schulten recognized that, for TRNs whose prototypes have been formed from sample data <span class="math inline">\(X\)</span> to represent an unknown manifold <span class="math inline">\(\mathcal{M} \subset \mathbb{R}^d\)</span>, the TRN that most faithfully represents <span class="math inline">\(\mathcal{M}\)</span> is another Delaunay sub-graph they call the <strong>Masked Delaunay Graph</strong> <span class="math inline">\(\mathcal{D}^{\mathcal{M}}\)</span>. The “masking” procedure intersects <span class="math inline">\(\mathcal{M}\)</span> (via its representation by <span class="math inline">\(W\)</span>) with <span class="math inline">\(\mathcal{D}\)</span> and retains only those edges in <span class="math inline">\(\mathcal{D}\)</span> which represent prototypes that are <em>adjacent on</em> <span class="math inline">\(\mathcal{M}\)</span>. By explicitly considering <span class="math inline">\(\mathcal{M}\)</span>, the adjacencies in <span class="math inline">\(\mathcal{D}^{\mathcal{M}}\)</span> are capable of representing complex manifolds (particularly, completely embedded structure in <span class="math inline">\(\mathbb{R}^d\)</span>).</p>
+<p>Taşdemir and Merényi <span class="citation">[<a href="#ref-TasdemirMerenyi2009" role="doc-biblioref">6</a>]</span> extend <span class="math inline">\(\mathcal{D}^{\mathcal{M}}\)</span> by weighting its edges by the number of samples which have informed the interpretation of connectivity on <span class="math inline">\(\mathcal{M}\)</span>. This graph, known as <strong>CADJ</strong>, exposes not only the <em>existence</em> of topological connectivities but also their <em>strengths</em>. The weight of edge <span class="math inline">\(i - j\)</span> is given by
+<span class="math display">\[ CADJ_{ij} = \# \{ x \, : \, BMU1(x)=i \, \&amp; \, BMU2(x) = j \}.\]</span>
+where <span class="math inline">\(x \in X\)</span> and <span class="math inline">\(BMU1(x)\)</span> and <span class="math inline">\(BMU2(x)\)</span> return the index of the first and second <strong>B</strong>est <strong>M</strong>atching <strong>U</strong>nit to <span class="math inline">\(x\)</span> in <span class="math inline">\(W\)</span>, respectively. The above expresson specifies each element of the <span class="math inline">\((n_W \times n_W)\)</span> weighted adjacency matrix of the CADJ graph. As defined, the weights <span class="math inline">\(CADJ_{ij}\)</span> are the counts of data which fall into the second-order Voronoi cells <span class="citation">[<a href="#ref-Okabe00" role="doc-biblioref">3</a>]</span> <span class="math inline">\(V_{ij}\)</span> of the second-order Voronoi tessellation generated by <span class="math inline">\(W\)</span>.</p>
+<p>Analysis of the CADJ graph is useful for structural inference from learned representations of manifolds. More densely connected regions in <span class="math inline">\(\mathbb{R}^d\)</span> (i.e., edges with higher CADJ adjacency weights) are more likely to indicate cohesive structure; conversely, weak topological connectivities can signal either “seams” in <span class="math inline">\(\mathcal{M}\)</span> (areas where structure changes), or possibly very subtle structural differences that are easily overlooked by considering topography alone (i.e., by considering only the distances between adjacency prototypes).</p>
+<p>In some special cases the TRN’s output space (prototype indexing set <span class="math inline">\(N\)</span>) possesses its <em>own topology</em>. Kohonen’s Self-Organizing Map <span class="citation">[<a href="#ref-Kohonen2001" role="doc-biblioref">7</a>]</span> is probably the most famous example of such a case. Relying on competitive neural learning, SOM training simultaneously forms the prototypes <span class="math inline">\(W \in \mathbb{R}^d\)</span> and a (self-organized) representation of these prototypes as neurons on rigid lattice structure <span class="math inline">\(\mathcal{L}\)</span> (the SOM’s output space, typically a rectangular or hexagonal lattice in <span class="math inline">\(\mathbb{R}^2\)</span> or <span class="math inline">\(\mathbb{R}^3\)</span>).</p>
+<p><img src="figs/som_anatomy.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>The visualizations afforded by the SOM’s output space have (for decades now) been harnessed for various tasks in pattern recognition and clustering. In the context of topology representation it has additional implications, such as allowing measures of the quality of this representation and, most importantly, providing the scaffolding required to view the TRN for data of arbitrary dimension. Without such a visualization the TRN is without much practical use, as it is “representing” topology on the indexing set <span class="math inline">\(N\)</span> which has no natural “home” (no space in which we, as analysts, can view or interact with it).</p>
+<p>Below we initialize a <code>TRN</code> object (which is the container for all information required to represent a TRN) for the learned SHGR SOM via the exposed class constructor in <code>TopoRNet</code>. The <code>initialize_TRN</code> method takes the topology representations of both the SOM’s input space (CADJ) and output space (the adjacency matrix of neurons prescribed by the lattice topology):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="background.html#cb4-1"></a><span class="co">## Build a new TRN object for SHGR </span></span>
+<span id="cb4-2"><a href="background.html#cb4-2"></a>SHGR.trn =<span class="st"> </span>TopoRNet<span class="op">::</span>TRN<span class="op">$</span><span class="kw">new</span>()</span>
+<span id="cb4-3"><a href="background.html#cb4-3"></a>SHGR.trn<span class="op">$</span><span class="kw">initialize_TRN</span>(SHGR.som<span class="op">$</span>CADJ, SHGR.som<span class="op">$</span>nu_ADJ)</span>
+<span id="cb4-4"><a href="background.html#cb4-4"></a>% Initializing TRN object<span class="op">:</span></span>
+<span id="cb4-5"><a href="background.html#cb4-5"></a>% <span class="op">----------------------------------------------------------------</span></span>
+<span id="cb4-6"><a href="background.html#cb4-6"></a>% Storing Output Topology<span class="op">:</span></span>
+<span id="cb4-7"><a href="background.html#cb4-7"></a>% <span class="op">++</span><span class="st"> </span>edge list ... done</span>
+<span id="cb4-8"><a href="background.html#cb4-8"></a>%    <span class="dv">2710</span> edges stored</span>
+<span id="cb4-9"><a href="background.html#cb4-9"></a>% <span class="op">++</span><span class="st"> </span>vertex degrees ...  done</span>
+<span id="cb4-10"><a href="background.html#cb4-10"></a>% <span class="op">++</span><span class="st"> </span>geodesic distances ...  done</span>
+<span id="cb4-11"><a href="background.html#cb4-11"></a>%    max dist =<span class="st"> </span><span class="dv">29</span></span>
+<span id="cb4-12"><a href="background.html#cb4-12"></a>% <span class="op">++</span><span class="st"> </span>neighborhood sizes ... done</span>
+<span id="cb4-13"><a href="background.html#cb4-13"></a>% <span class="op">----------------------------------------------------------------</span></span>
+<span id="cb4-14"><a href="background.html#cb4-14"></a>% Storing CADJ Topology<span class="op">:</span></span>
+<span id="cb4-15"><a href="background.html#cb4-15"></a>% <span class="op">++</span><span class="st"> </span>edge list ... done</span>
+<span id="cb4-16"><a href="background.html#cb4-16"></a>%    <span class="dv">1874</span> edges stored</span>
+<span id="cb4-17"><a href="background.html#cb4-17"></a>% <span class="op">++</span><span class="st"> </span>weights ... done</span>
+<span id="cb4-18"><a href="background.html#cb4-18"></a>% <span class="op">++</span><span class="st"> </span>vertex degrees ...  done</span>
+<span id="cb4-19"><a href="background.html#cb4-19"></a>% <span class="op">++</span><span class="st"> </span>forward folding lengths ... done</span>
+<span id="cb4-20"><a href="background.html#cb4-20"></a>% <span class="op">++</span><span class="st"> </span>backward folding lengths ... done</span>
+<span id="cb4-21"><a href="background.html#cb4-21"></a>% <span class="op">++</span><span class="st"> </span>topology preserving radius ... done</span>
+<span id="cb4-22"><a href="background.html#cb4-22"></a>%    CADJ_TP_radius =<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb4-23"><a href="background.html#cb4-23"></a>% <span class="op">++</span><span class="st"> </span>activating all edges ... done</span>
+<span id="cb4-24"><a href="background.html#cb4-24"></a>% <span class="op">----------------------------------------------------------------</span></span>
+<span id="cb4-25"><a href="background.html#cb4-25"></a>% Calculating CADJvis statistics</span>
+<span id="cb4-26"><a href="background.html#cb4-26"></a>% <span class="op">++</span><span class="st"> </span>CADJ local rank stats ... done</span>
+<span id="cb4-27"><a href="background.html#cb4-27"></a>% <span class="op">++</span><span class="st"> </span>CADJ global rank stats ... done</span>
+<span id="cb4-28"><a href="background.html#cb4-28"></a>% <span class="op">++</span><span class="st"> </span>CADJ length stats ... done</span>
+<span id="cb4-29"><a href="background.html#cb4-29"></a>% Call <span class="op">$</span>get_CADJvis_stats to view</span>
+<span id="cb4-30"><a href="background.html#cb4-30"></a>% <span class="op">----------------------------------------------------------------</span></span>
+<span id="cb4-31"><a href="background.html#cb4-31"></a>% Storing CONN Topology<span class="op">:</span></span>
+<span id="cb4-32"><a href="background.html#cb4-32"></a>% <span class="op">++</span><span class="st"> </span>edge list ... done</span>
+<span id="cb4-33"><a href="background.html#cb4-33"></a>%    <span class="dv">2234</span> edges stored</span>
+<span id="cb4-34"><a href="background.html#cb4-34"></a>% <span class="op">++</span><span class="st"> </span>weights ... done</span>
+<span id="cb4-35"><a href="background.html#cb4-35"></a>% <span class="op">++</span><span class="st"> </span>vertex degrees ...  done</span>
+<span id="cb4-36"><a href="background.html#cb4-36"></a>% <span class="op">++</span><span class="st"> </span>forward folding lengths ... done</span>
+<span id="cb4-37"><a href="background.html#cb4-37"></a>% <span class="op">++</span><span class="st"> </span>backward folding lengths ... done</span>
+<span id="cb4-38"><a href="background.html#cb4-38"></a>% <span class="op">++</span><span class="st"> </span>topology preserving radius ... done</span>
+<span id="cb4-39"><a href="background.html#cb4-39"></a>%    CONN_TP_radius =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb4-40"><a href="background.html#cb4-40"></a>% <span class="op">++</span><span class="st"> </span>activating all edges ... done</span>
+<span id="cb4-41"><a href="background.html#cb4-41"></a>% <span class="op">----------------------------------------------------------------</span></span>
+<span id="cb4-42"><a href="background.html#cb4-42"></a>% Calculating CONNvis statistics</span>
+<span id="cb4-43"><a href="background.html#cb4-43"></a>% <span class="op">++</span><span class="st"> </span>CONN local rank stats ... done</span>
+<span id="cb4-44"><a href="background.html#cb4-44"></a>% <span class="op">++</span><span class="st"> </span>CONN global rank stats ... done</span>
+<span id="cb4-45"><a href="background.html#cb4-45"></a>% <span class="op">++</span><span class="st"> </span>CONN length stats ... done</span>
+<span id="cb4-46"><a href="background.html#cb4-46"></a>% Call <span class="op">$</span>get_CONNvis_stats to view</span>
+<span id="cb4-47"><a href="background.html#cb4-47"></a>% <span class="op">----------------------------------------------------------------</span></span></code></pre></div>
+<p>As visible in the output messages, <code>initialize_TRN</code> computes the CADJvis and CONNvis statistics of the TRN which are covered in the next chapter. The <code>TRN</code> object stores the graphs as an edge list, which is a two-column matrix indicating the <span class="math inline">\((i,j)\)</span> indices of the vertices connected by each edge, and an edge weight vector whose elements list the weights of edges defined in the edge list. The edge list and their corresponding weights which are stored during initialization can be accessed via:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="background.html#cb5-1"></a><span class="co">## First few CONN edges and their weights </span></span>
+<span id="cb5-2"><a href="background.html#cb5-2"></a><span class="kw">head</span>(SHGR.trn<span class="op">$</span>CONN_EL)</span>
+<span id="cb5-3"><a href="background.html#cb5-3"></a>%      [,<span class="dv">1</span>] [,<span class="dv">2</span>]</span>
+<span id="cb5-4"><a href="background.html#cb5-4"></a>% [<span class="dv">1</span>,]    <span class="dv">2</span>    <span class="dv">1</span></span>
+<span id="cb5-5"><a href="background.html#cb5-5"></a>% [<span class="dv">2</span>,]    <span class="dv">3</span>    <span class="dv">1</span></span>
+<span id="cb5-6"><a href="background.html#cb5-6"></a>% [<span class="dv">3</span>,]   <span class="dv">21</span>    <span class="dv">1</span></span>
+<span id="cb5-7"><a href="background.html#cb5-7"></a>% [<span class="dv">4</span>,]   <span class="dv">22</span>    <span class="dv">1</span></span>
+<span id="cb5-8"><a href="background.html#cb5-8"></a>% [<span class="dv">5</span>,]   <span class="dv">83</span>    <span class="dv">1</span></span>
+<span id="cb5-9"><a href="background.html#cb5-9"></a>% [<span class="dv">6</span>,]   <span class="dv">84</span>    <span class="dv">1</span></span>
+<span id="cb5-10"><a href="background.html#cb5-10"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>CONN))</span>
+<span id="cb5-11"><a href="background.html#cb5-11"></a>% [<span class="dv">1</span>] <span class="dv">57</span>  <span class="dv">2</span> <span class="dv">69</span>  <span class="dv">3</span>  <span class="dv">2</span>  <span class="dv">1</span></span>
+<span id="cb5-12"><a href="background.html#cb5-12"></a></span>
+<span id="cb5-13"><a href="background.html#cb5-13"></a><span class="co">## First few CADJ edges and their weights </span></span>
+<span id="cb5-14"><a href="background.html#cb5-14"></a><span class="kw">head</span>(SHGR.trn<span class="op">$</span>CADJ_EL)</span>
+<span id="cb5-15"><a href="background.html#cb5-15"></a>%      [,<span class="dv">1</span>] [,<span class="dv">2</span>]</span>
+<span id="cb5-16"><a href="background.html#cb5-16"></a>% [<span class="dv">1</span>,]    <span class="dv">2</span>    <span class="dv">1</span></span>
+<span id="cb5-17"><a href="background.html#cb5-17"></a>% [<span class="dv">2</span>,]    <span class="dv">3</span>    <span class="dv">1</span></span>
+<span id="cb5-18"><a href="background.html#cb5-18"></a>% [<span class="dv">3</span>,]   <span class="dv">21</span>    <span class="dv">1</span></span>
+<span id="cb5-19"><a href="background.html#cb5-19"></a>% [<span class="dv">4</span>,]   <span class="dv">22</span>    <span class="dv">1</span></span>
+<span id="cb5-20"><a href="background.html#cb5-20"></a>% [<span class="dv">5</span>,]   <span class="dv">83</span>    <span class="dv">1</span></span>
+<span id="cb5-21"><a href="background.html#cb5-21"></a>% [<span class="dv">6</span>,]   <span class="dv">84</span>    <span class="dv">1</span></span>
+<span id="cb5-22"><a href="background.html#cb5-22"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>CADJ))</span>
+<span id="cb5-23"><a href="background.html#cb5-23"></a>% [<span class="dv">1</span>] <span class="dv">25</span>  <span class="dv">2</span> <span class="dv">28</span>  <span class="dv">1</span>  <span class="dv">1</span>  <span class="dv">1</span></span></code></pre></div>
+
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-MartinetzSchulten1994">
+<p>[1] T. Martinetz and K. Schulten, “Topology representing networks,” <em>Neural Networks</em>, vol. 7, no. 3, pp. 507–522, 1994.</p>
+</div>
+<div id="ref-Delaunay1934">
+<p>[2] B. Delaunay, “Sur la sphere vide,” <em>Izv. Akad. Nauk SSSR, Otdelenie Matematicheskii i Estestvennyka Nauk</em>, vol. 7, pp. 793–800, 1934.</p>
+</div>
+<div id="ref-Okabe00">
+<p>[3] A. Okabe, B. Boots, K. Sugihara, and S. N. Chiu, <em>Spatial tessellations: Concepts and applications of Voronoi diagrams</em>, 2nd ed. John Wiley; Sons, Inc., 2000.</p>
+</div>
+<div id="ref-Gabriel1969">
+<p>[4] K. R. Gabriel and R. R. Sokal, “A new statistical approach to geographic variation analysis,” <em>Systematic Zoology</em>, vol. 18, no. 3, pp. 259–278, 1969.</p>
+</div>
+<div id="ref-Toussaint1980">
+<p>[5] G. T. Toussaint, “The relative neighbourhood graph of a finite planar set,” <em>Pattern recognition</em>, vol. 12, no. 4, pp. 261–268, 1980.</p>
+</div>
+<div id="ref-TasdemirMerenyi2009">
+<p>[6] K. Taşdemir and E. Merényi, “Exploiting data topology in visualization and clustering of self-organizing maps,” <em>IEEE Transactions on Neural Networks</em>, vol. 20, no. 4, pp. 549–562, 2009.</p>
+</div>
+<div id="ref-Kohonen2001">
+<p>[7] T. Kohonen, <em>Self-organizing maps</em>. Springer, 2000.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="installation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TopoRNet.README.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

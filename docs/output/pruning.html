@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Pruning | TopoRNet</title>
+  <meta name="description" content="Chapter 4 Pruning | TopoRNet" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Pruning | TopoRNet" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Pruning | TopoRNet" />
+  
+  
+  
+
+<meta name="author" content="Josh Taylor" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visualizations.html"/>
+<link rel="next" href="topology-preservation-measures.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a></li>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
+<li class="chapter" data-level="3" data-path="visualizations.html"><a href="visualizations.html"><i class="fa fa-check"></i><b>3</b> Visualizations</a><ul>
+<li class="chapter" data-level="3.1" data-path="visualizations.html"><a href="visualizations.html#topoview"><i class="fa fa-check"></i><b>3.1</b> TopoView</a></li>
+<li class="chapter" data-level="3.2" data-path="visualizations.html"><a href="visualizations.html#connvis"><i class="fa fa-check"></i><b>3.2</b> CONNvis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pruning.html"><a href="pruning.html"><i class="fa fa-check"></i><b>4</b> Pruning</a><ul>
+<li class="chapter" data-level="4.1" data-path="pruning.html"><a href="pruning.html#grid-pruning"><i class="fa fa-check"></i><b>4.1</b> Grid Pruning</a></li>
+<li class="chapter" data-level="4.2" data-path="pruning.html"><a href="pruning.html#dm-prune"><i class="fa fa-check"></i><b>4.2</b> DM-Prune</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html"><i class="fa fa-check"></i><b>5</b> Topology Preservation Measures</a><ul>
+<li class="chapter" data-level="5.1" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-product"><i class="fa fa-check"></i><b>5.1</b> Topographic Product</a></li>
+<li class="chapter" data-level="5.2" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#differential-topographic-function"><i class="fa fa-check"></i><b>5.2</b> Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.3" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#weighted-differential-topographic-function"><i class="fa fa-check"></i><b>5.3</b> Weighted Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.4" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-function"><i class="fa fa-check"></i><b>5.4</b> Topographic Function</a></li>
+<li class="chapter" data-level="5.5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#calculating-tpms-with-topornet"><i class="fa fa-check"></i><b>5.5</b> Calculating TPMs with TopoRNet</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TopoRNet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pruning" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Pruning</h1>
+<p>Ideally, data structure (i.e., clusters) can be readily discerned from the CONNvis (or CADJvis) of a learned SOM via identification of its closed and connected (graph) communities. In practice, particularly for noisy data, CONNvis does not immediately indicate cleanly separated closed communities. This situation is depicted below, where the SHGR CONNvis has been visualized atop its “labeled lattice.” Lattice labeling results from propagating the known (true) data labels to the lattice via the SOM mapping; here, the 20 distinct colors painted in each neural cell represent the 20 distinct truth labels of the SHGR image cube.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="pruning.html#cb13-1"></a><span class="co">## Visualize the SOM labels </span></span>
+<span id="cb13-2"><a href="pruning.html#cb13-2"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM=</span>SHGR.som, </span>
+<span id="cb13-3"><a href="pruning.html#cb13-3"></a>                        <span class="dt">text.cex =</span> <span class="fl">0.8</span>, <span class="dt">text.font =</span> <span class="dv">2</span>, <span class="dt">rprop =</span> <span class="dv">0</span>)</span>
+<span id="cb13-4"><a href="pruning.html#cb13-4"></a></span>
+<span id="cb13-5"><a href="pruning.html#cb13-5"></a><span class="co">## Add CONNvis to the labeled SOM </span></span>
+<span id="cb13-6"><a href="pruning.html#cb13-6"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb13-7"><a href="pruning.html#cb13-7"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CONNvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-14-1.png" alt="CONNvis Communities vs. True Clusters" width="49%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-14-2.png" alt="CONNvis Communities vs. True Clusters" width="49%" />
+<p class="caption">
+Figure 4.1: CONNvis Communities vs. True Clusters
+</p>
+</div>
+<p>While the truth labeling highlights the organization of the SHGR SOM, CONNvis is not completely disconnected along every cluster boundary visible on the lattice: notably, the clusters F &amp; M, K &amp; N, H &amp; P, D &amp; T, and A &amp; R are connected by the CONN graph. In real unsupervised learning settings we do not have the truth labels to propagate to the SOM for inspection; in such situations relying on the CONNvis, as shown, can lead to improper cluster inference.</p>
+<div id="grid-pruning" class="section level2">
+<h2><span class="header-section-number">4.1</span> Grid Pruning</h2>
+<p>The obvious solution is to enforce further sparsity to CADJ or CONN (a process known as <em>pruning</em>) to help facilitate inference of its community structure. Because pruning CADJ/CONN introduces the possibility of destroying real clusters of neurons, with the introduction of CONNvis Taşdemir and Merényi introduced sensible methodology to guide the pruning process along a grid defined by the sets of unique local and global edge ranks. Intuitively, edges of low local or global rank are prime candidates for pruning. What constitutes “low” changes, of course, with every dataset. A conservative approach to defining “low rank” in a particular setting is formed by studying summary statistics of CADJ/CONN weights, grouped by rank. Ranks which primarily contain low-weight edges can usually be safely removed from the graph without deleterious impact on prominent cluster structure. <code>TopoRNet</code> provides built-in visualization functions for viewing these grouped statistics:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="pruning.html#cb14-1"></a><span class="co">## CONNvis Stats by local rank </span></span>
+<span id="cb14-2"><a href="pruning.html#cb14-2"></a>TopoRNet<span class="op">::</span><span class="kw">vis_CONNvis_stats</span>(<span class="dt">TRN=</span>SHGR.trn, <span class="dt">group_by=</span><span class="st">&#39;lrank&#39;</span>)</span>
+<span id="cb14-3"><a href="pruning.html#cb14-3"></a></span>
+<span id="cb14-4"><a href="pruning.html#cb14-4"></a><span class="co">## CONNvis Stats by global rank </span></span>
+<span id="cb14-5"><a href="pruning.html#cb14-5"></a>TopoRNet<span class="op">::</span><span class="kw">vis_CONNvis_stats</span>(<span class="dt">TRN=</span>SHGR.trn, <span class="dt">group_by=</span><span class="st">&#39;grank&#39;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-15-1.png" alt="CADJ/CONN Graph Statistics" width="49%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-15-2.png" alt="CADJ/CONN Graph Statistics" width="49%" />
+<p class="caption">
+Figure 4.2: CADJ/CONN Graph Statistics
+</p>
+</div>
+<p>The above displays the CONN edge weight summary statistics (median + IQR + whiskers) grouped by the unique local and global edge ranks found in the graph. As the series of boxplots show, edges with both local and global rank <span class="math inline">\(&gt; 5\)</span> have reliably low weights, suggesting their removal would not dramatically impact cluster inference from the SHGR CONNvis. A <code>TRN</code> object has many built-in tools to remove edges from either the CONN or CADJ graph (see the help documentation for any of the <code>prune_CADJ_*</code> or <code>prune_CONN_*</code> methods). Here, we prune CONN edges whose local and global rank is <span class="math inline">\(&gt; 5\)</span>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="pruning.html#cb15-1"></a><span class="co">## Prune CONN local ranks &gt; 5</span></span>
+<span id="cb15-2"><a href="pruning.html#cb15-2"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_lrank</span>(<span class="dv">5</span>)</span>
+<span id="cb15-3"><a href="pruning.html#cb15-3"></a>% Set <span class="dv">440</span> CONN edges inactive.</span>
+<span id="cb15-4"><a href="pruning.html#cb15-4"></a></span>
+<span id="cb15-5"><a href="pruning.html#cb15-5"></a><span class="co">## Prune CONN global ranks &gt; 5</span></span>
+<span id="cb15-6"><a href="pruning.html#cb15-6"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_grank</span>(<span class="dv">5</span>)</span>
+<span id="cb15-7"><a href="pruning.html#cb15-7"></a>% Set <span class="dv">866</span> CONN edges inactive.</span></code></pre></div>
+<p>Note that the status messages from pruning indicate the number of edges that were inactivated by the method call. Edges are never removed entirely from the <code>TRN</code> object; instead, they are set as “inactive”. At any point we can view the status of an edge, i.e., whether it is active (=1), or inactive (=0), via:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="pruning.html#cb16-1"></a><span class="co">## Status of first few CONN edges </span></span>
+<span id="cb16-2"><a href="pruning.html#cb16-2"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>CONN_active))</span>
+<span id="cb16-3"><a href="pruning.html#cb16-3"></a>% [<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></span></code></pre></div>
+<p>For example, the edge list of the first few edges inactivated by the above pruning can be retrieved via:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="pruning.html#cb17-1"></a><span class="kw">head</span>(SHGR.trn<span class="op">$</span>CONN_EL[SHGR.trn<span class="op">$</span>CONN_active<span class="op">==</span><span class="dv">0</span>, ])</span>
+<span id="cb17-2"><a href="pruning.html#cb17-2"></a>%      [,<span class="dv">1</span>] [,<span class="dv">2</span>]</span>
+<span id="cb17-3"><a href="pruning.html#cb17-3"></a>% [<span class="dv">1</span>,]    <span class="dv">3</span>    <span class="dv">1</span></span>
+<span id="cb17-4"><a href="pruning.html#cb17-4"></a>% [<span class="dv">2</span>,]   <span class="dv">22</span>    <span class="dv">1</span></span>
+<span id="cb17-5"><a href="pruning.html#cb17-5"></a>% [<span class="dv">3</span>,]   <span class="dv">83</span>    <span class="dv">1</span></span>
+<span id="cb17-6"><a href="pruning.html#cb17-6"></a>% [<span class="dv">4</span>,]   <span class="dv">84</span>    <span class="dv">1</span></span>
+<span id="cb17-7"><a href="pruning.html#cb17-7"></a>% [<span class="dv">5</span>,]    <span class="dv">1</span>    <span class="dv">3</span></span>
+<span id="cb17-8"><a href="pruning.html#cb17-8"></a>% [<span class="dv">6</span>,]   <span class="dv">45</span>    <span class="dv">3</span></span></code></pre></div>
+<p>Any previous pruning can be reversed by restoring all edge statuses to active:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="pruning.html#cb18-1"></a><span class="co">## Un-do the above CONN pruning</span></span>
+<span id="cb18-2"><a href="pruning.html#cb18-2"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CONN_edges</span>()</span>
+<span id="cb18-3"><a href="pruning.html#cb18-3"></a></span>
+<span id="cb18-4"><a href="pruning.html#cb18-4"></a><span class="co">## Check that all edges are active</span></span>
+<span id="cb18-5"><a href="pruning.html#cb18-5"></a><span class="kw">any</span>(SHGR.trn<span class="op">$</span>CONN_active <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb18-6"><a href="pruning.html#cb18-6"></a>% [<span class="dv">1</span>] <span class="ot">FALSE</span></span></code></pre></div>
+<p>The CONNvis (CADJvis) visualization functions exposed by <code>TopoRNet</code> only show active edges. Compared to the original CONNvis, we can see that pruning according to the above criteria, guided by the CONNvis group statistics, produces a graph which retains most of its important structure but is noticeably cleaner:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="pruning.html#cb19-1"></a><span class="co">## Original CONNvis, with underlying labels </span></span>
+<span id="cb19-2"><a href="pruning.html#cb19-2"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb19-3"><a href="pruning.html#cb19-3"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CONNvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb19-4"><a href="pruning.html#cb19-4"></a></span>
+<span id="cb19-5"><a href="pruning.html#cb19-5"></a><span class="co">## Re-prune according to the above, and visualize </span></span>
+<span id="cb19-6"><a href="pruning.html#cb19-6"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_lrank</span>(<span class="dv">5</span>)</span>
+<span id="cb19-7"><a href="pruning.html#cb19-7"></a>% Set <span class="dv">440</span> CONN edges inactive.</span>
+<span id="cb19-8"><a href="pruning.html#cb19-8"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_grank</span>(<span class="dv">5</span>)</span>
+<span id="cb19-9"><a href="pruning.html#cb19-9"></a>% Set <span class="dv">866</span> CONN edges inactive.</span>
+<span id="cb19-10"><a href="pruning.html#cb19-10"></a></span>
+<span id="cb19-11"><a href="pruning.html#cb19-11"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb19-12"><a href="pruning.html#cb19-12"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CONNvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-20"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-20-1.png" alt="CONNvis Pruning Comparison" width="49%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-20-2.png" alt="CONNvis Pruning Comparison" width="49%" />
+<p class="caption">
+Figure 4.3: CONNvis Pruning Comparison
+</p>
+</div>
+</div>
+<div id="dm-prune" class="section level2">
+<h2><span class="header-section-number">4.2</span> DM-Prune</h2>
+<p>Grid pruning, discussed above, is relatively simple and intuitive but lacks any mechanism to suggest optimal pruning levels. For example, clusters F &amp; M, K &amp; N and D &amp; T were not cleanly separated by the grid pruning threshold levels selected above; more aggressive grid pruning might result in cleaner separation, but there is no barometer of how aggressive one should be in each particular data setting. As such, several grid pruning levels are typically specified (based on analysis of, e.g., the above rank statistics) and the resulting pruned CONNvis assessed for clarity. The DM-Prune procedure (<span class="citation">[<a href="#ref-TaylorMerenyi2020" role="doc-biblioref">9</a>]</span>, <span class="citation">[<a href="#ref-TaylorMerenyi2020b" role="doc-biblioref">10</a>]</span>) was introduced to facilitate the process of selecting optimal pruning levels via more formal statistical modeling.</p>
+<p>DM-Prune is designed for the CADJ graph (not CONN) and comprises two steps. The first assigns a “quality” score <span class="math inline">\(\mu\)</span> to each CADJ edge following the same logic that human analysts use when assessing edge quality. <span class="math inline">\(\mu\)</span> is defined as the geometric mean of the local and global strength of each edge, a factor representing the edge’s length on the SOM lattice (longer connections, resulting from forward topology violtions of the SOM mapping, are considered less reliable), and an optional fourth component representing edge reliability (derived from bootstrapped re-sampling of the CADJ graph). Each component contributing to the mean is normalized to <span class="math inline">\([0,1]\)</span>, with the convention that <span class="math inline">\(\mu \to 0\)</span> signals lower edge quality. Edges are then ranked by their (increasing) <span class="math inline">\(\mu\)</span> score, with the unique set of ranks defining an (ordered) set of pruning steps. At each pruning step <span class="math inline">\(t\)</span>, edges whose <span class="math inline">\(\mu\)</span>-rank is <span class="math inline">\(&lt; t\)</span> are removed from the graph.</p>
+<p>A Dirichlet-Multinomial (DM) likelihood of the sparse set of CADJ edge weights monitors the effects of pruning over “time” <span class="math inline">\(t\)</span>. Recall from Section <a href="background.html#background">2</a> that the edge weights <span class="math inline">\(CADJ_{ij}\)</span> are counts of sample data which are contained in the second-order Voronoi cell <span class="math inline">\(V_{ij}\)</span> generated by the set of learned prototypes <span class="math inline">\(W\)</span>. As a set of counts in each (highly irregular) second-order Voronoi “bin”, the Multinomial likelihood is the natural statistical model for CADJ. When combined with a Dirichlet prior on the bin probabilities, the Dirichlet-Multinomial likelihood, re-computed at the increasingly sparse set of CADJ counts resulting from pruning at each step <span class="math inline">\(t\)</span>, provides a formal model of the impact of removing a particular set of edges from the CADJ graph.</p>
+<p>Moreover, specific Dirichlet priors allow an analyst the flexibility to incorporate new types of information into the modeling procedure. For instance, the Uniform prior (i.e., when all Dirichlet pseudocounts = 1) is commonly used to indicate uninformed prior beliefs. In this setting, where each Multinomial bin <span class="math inline">\(V_{ij}\)</span> is a geometric object in <span class="math inline">\(\mathbb{R}^d\)</span>, a more natural “uninformed” prior belief of each bin’s count is proportional to its volume (i.e., for completely unstructured data, larger bins should intuitively have higher counts). The DM-Prune methodology recommends use of this latter volume-based prior to incorporate more of the manifold knowledge uncovered during SOM learning. A plot of the DM-likelihood calculated at each pruning step <span class="math inline">\(t\)</span> (under a user-specified prior) is known as the DM-Prune <span class="math inline">\(\Lambda\)</span>-path.</p>
+<p>The companion R package <a href="https://github.com/somdisco/VorVQ"><code>VorVQ</code></a> provides a way of estimating these Voronoi volumes via ellipsoid approximations to each second-order Voronoi bin. The <code>SHGR.VORList</code> variable included with <code>TopoRNet</code> contains the (partial) results of this computation for the SHGR SOM, which we use to construct a prior for CADJ below, in the form of an adjacency matrix whose dimensions match CADJ. The prior adjacency should be positive everywhere that CADJ is positive.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="pruning.html#cb20-1"></a><span class="co">## Initialize an empty adjacency matrix </span></span>
+<span id="cb20-2"><a href="pruning.html#cb20-2"></a><span class="co">## with the same dimensions as CADJ </span></span>
+<span id="cb20-3"><a href="pruning.html#cb20-3"></a>priorCADJ =<span class="st"> </span><span class="dv">0</span><span class="op">*</span>SHGR.som<span class="op">$</span>CADJ </span>
+<span id="cb20-4"><a href="pruning.html#cb20-4"></a></span>
+<span id="cb20-5"><a href="pruning.html#cb20-5"></a><span class="co">## Populate the entries corresponding to non-zero CADJ </span></span>
+<span id="cb20-6"><a href="pruning.html#cb20-6"></a><span class="co">## values with the pre-computed volumes of the corresponding </span></span>
+<span id="cb20-7"><a href="pruning.html#cb20-7"></a><span class="co">## second-order Voronoi Maximum Volume Inscribed Ellipsoids (MVIEs). </span></span>
+<span id="cb20-8"><a href="pruning.html#cb20-8"></a><span class="co">## The vor2_MVIE_volratio field of a VOR object stores these volumes, </span></span>
+<span id="cb20-9"><a href="pruning.html#cb20-9"></a><span class="co">## normalized to sum to 1. </span></span>
+<span id="cb20-10"><a href="pruning.html#cb20-10"></a>priorCADJ[TopoRNet<span class="op">::</span>SHGR.VORList<span class="op">$</span>vor2_active] =<span class="st"> </span></span>
+<span id="cb20-11"><a href="pruning.html#cb20-11"></a><span class="st">  </span>TopoRNet<span class="op">::</span>SHGR.VORList<span class="op">$</span>vor2_MVIE_volratio</span>
+<span id="cb20-12"><a href="pruning.html#cb20-12"></a></span>
+<span id="cb20-13"><a href="pruning.html#cb20-13"></a><span class="co">## Check that the prior is positive everywhere that CADJ is positive </span></span>
+<span id="cb20-14"><a href="pruning.html#cb20-14"></a><span class="kw">any</span>(<span class="kw">c</span>(priorCADJ[SHGR.som<span class="op">$</span>CADJ <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb20-15"><a href="pruning.html#cb20-15"></a>% [<span class="dv">1</span>] <span class="ot">FALSE</span></span>
+<span id="cb20-16"><a href="pruning.html#cb20-16"></a></span>
+<span id="cb20-17"><a href="pruning.html#cb20-17"></a><span class="co">## Check that the volume ratios sum to 1</span></span>
+<span id="cb20-18"><a href="pruning.html#cb20-18"></a><span class="kw">sum</span>(priorCADJ)</span>
+<span id="cb20-19"><a href="pruning.html#cb20-19"></a>% [<span class="dv">1</span>] <span class="dv">1</span></span>
+<span id="cb20-20"><a href="pruning.html#cb20-20"></a></span>
+<span id="cb20-21"><a href="pruning.html#cb20-21"></a><span class="co">## Re-normalize, such that the prior pseudo-counts </span></span>
+<span id="cb20-22"><a href="pruning.html#cb20-22"></a><span class="co">## equal the sum of CADJ weights</span></span>
+<span id="cb20-23"><a href="pruning.html#cb20-23"></a>priorCADJ =<span class="st"> </span>priorCADJ <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(SHGR.som<span class="op">$</span>CADJ)</span></code></pre></div>
+<p>Once constructed, the CADJ prior (in adjacency-matrix format) is used to calculate the DMP-Prune <span class="math inline">\(\Lambda\)</span>-path of a <code>TRN</code> object:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="pruning.html#cb21-1"></a><span class="co">## Calculate the DM-Prune Lambda Path, </span></span>
+<span id="cb21-2"><a href="pruning.html#cb21-2"></a><span class="co">## given a user-specified prior </span></span>
+<span id="cb21-3"><a href="pruning.html#cb21-3"></a>SHGR.trn<span class="op">$</span><span class="kw">calc_DMPrune_LambdaPath</span>(priorCADJ)</span>
+<span id="cb21-4"><a href="pruning.html#cb21-4"></a>% Building DM<span class="op">-</span>Prune Lambda Path<span class="op">:</span></span>
+<span id="cb21-5"><a href="pruning.html#cb21-5"></a>% <span class="op">----------------------------------------------------------------</span></span>
+<span id="cb21-6"><a href="pruning.html#cb21-6"></a>% <span class="op">++</span><span class="st"> </span>gamma values<span class="op">:</span><span class="st"> </span>G =<span class="st"> </span><span class="dv">1</span>, N =<span class="st"> </span><span class="dv">1</span>, L =<span class="st"> </span><span class="dv">1</span>, S =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb21-7"><a href="pruning.html#cb21-7"></a>% No bootstrap edge significances found, skipping.</span>
+<span id="cb21-8"><a href="pruning.html#cb21-8"></a>%    Call <span class="op">$</span>set_BootSig to incorporate.</span>
+<span id="cb21-9"><a href="pruning.html#cb21-9"></a>% Checking <span class="op">&amp;</span><span class="st"> </span>storing prior ... done</span></code></pre></div>
+<p><img src="TopoRNet.README_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre><code>% ----------------------------------------------------------------
+% Computing mu scores:
+% ++ mu_G (global) ... done
+% ++ mu_N (local) ... done
+% ++ mu_L (length) ... done
+% ++ aggregate mu ... done
+% ++ ranking mu ... done
+% ----------------------------------------------------------------
+% Computing Lambda Path ... done</code></pre>
+<p>The method <code>calc_DMPrune_LambdaPath</code> first stores the given prior, which can be accessed anytime via</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="pruning.html#cb23-1"></a><span class="co">## The prior values corresponding to the first few CADJ edges</span></span>
+<span id="cb23-2"><a href="pruning.html#cb23-2"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_prior))</span>
+<span id="cb23-3"><a href="pruning.html#cb23-3"></a>% [<span class="dv">1</span>] <span class="fl">3.88246376</span> <span class="fl">0.24885308</span> <span class="fl">9.79543750</span> <span class="fl">0.04908458</span> <span class="fl">0.24244421</span> <span class="fl">0.34280694</span></span></code></pre></div>
+<p>A scatter plot comparing each prior value to its corresponding CADJ count is automatically produced, allowing an analyst to assess the relationship between the prior and observed CADJ values. Intuitively, edges with low CADJ weight but high prior values are likely causing the most negative impact to DM-likelihood model.</p>
+<p>Additionally, the individual and aggregate <span class="math inline">\(\mu\)</span>-scores, and the overall <span class="math inline">\(\mu\)</span>-rank for each edge, are computed and stored. These can be accessed via:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="pruning.html#cb24-1"></a><span class="co">## For the first few CADJ edges ... </span></span>
+<span id="cb24-2"><a href="pruning.html#cb24-2"></a></span>
+<span id="cb24-3"><a href="pruning.html#cb24-3"></a><span class="co">## Global mu-score </span></span>
+<span id="cb24-4"><a href="pruning.html#cb24-4"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_mu_G))</span>
+<span id="cb24-5"><a href="pruning.html#cb24-5"></a>% [<span class="dv">1</span>] <span class="fl">0.30120482</span> <span class="fl">0.02409639</span> <span class="fl">0.33734940</span> <span class="fl">0.01204819</span> <span class="fl">0.01204819</span> <span class="fl">0.01204819</span></span>
+<span id="cb24-6"><a href="pruning.html#cb24-6"></a></span>
+<span id="cb24-7"><a href="pruning.html#cb24-7"></a><span class="co">## Local mu-score </span></span>
+<span id="cb24-8"><a href="pruning.html#cb24-8"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_mu_N))</span>
+<span id="cb24-9"><a href="pruning.html#cb24-9"></a>% [<span class="dv">1</span>] <span class="fl">1.00000000</span> <span class="fl">0.14285714</span> <span class="fl">1.00000000</span> <span class="fl">0.09090909</span> <span class="fl">0.02777778</span> <span class="fl">0.04000000</span></span>
+<span id="cb24-10"><a href="pruning.html#cb24-10"></a></span>
+<span id="cb24-11"><a href="pruning.html#cb24-11"></a><span class="co">## Length mu-score </span></span>
+<span id="cb24-12"><a href="pruning.html#cb24-12"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_mu_L))</span>
+<span id="cb24-13"><a href="pruning.html#cb24-13"></a>% [<span class="dv">1</span>] <span class="fl">1.000000000</span> <span class="fl">0.965517241</span> <span class="fl">1.000000000</span> <span class="fl">1.000000000</span> <span class="fl">0.001231527</span> <span class="fl">0.001231527</span></span>
+<span id="cb24-14"><a href="pruning.html#cb24-14"></a></span>
+<span id="cb24-15"><a href="pruning.html#cb24-15"></a><span class="co">## Composite mu-score </span></span>
+<span id="cb24-16"><a href="pruning.html#cb24-16"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_mu))</span>
+<span id="cb24-17"><a href="pruning.html#cb24-17"></a>% [<span class="dv">1</span>] <span class="fl">0.670327915</span> <span class="fl">0.149235209</span> <span class="fl">0.696134749</span> <span class="fl">0.103080474</span> <span class="fl">0.007441968</span> <span class="fl">0.008403792</span></span>
+<span id="cb24-18"><a href="pruning.html#cb24-18"></a></span>
+<span id="cb24-19"><a href="pruning.html#cb24-19"></a><span class="co">## mu-rank, 1 = lowest composite mu-score </span></span>
+<span id="cb24-20"><a href="pruning.html#cb24-20"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_mu_rank))</span>
+<span id="cb24-21"><a href="pruning.html#cb24-21"></a>% [<span class="dv">1</span>] <span class="dv">634</span> <span class="dv">272</span> <span class="dv">641</span> <span class="dv">235</span>  <span class="dv">79</span>  <span class="dv">92</span></span></code></pre></div>
+<p>The (sorted) set of unique <span class="math inline">\(\mu\)</span>-ranks define the possible DM-Prune steps <span class="math inline">\(t\)</span> are also stored</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="pruning.html#cb25-1"></a><span class="co">## DM-Prune steps </span></span>
+<span id="cb25-2"><a href="pruning.html#cb25-2"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_pruneStep))</span>
+<span id="cb25-3"><a href="pruning.html#cb25-3"></a>% [<span class="dv">1</span>] <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<p>and the resulting <span class="math inline">\(\Lambda\)</span> values (the normalized DM-likelihood) computed after sparsifying all edges from the model whose <span class="math inline">\(\mu\)</span>-rank is <span class="math inline">\(&lt;\)</span> each step <span class="math inline">\(t\)</span> can be accessed via</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="pruning.html#cb26-1"></a><span class="kw">head</span>(<span class="kw">c</span>(SHGR.trn<span class="op">$</span>DMP_Lambda))</span>
+<span id="cb26-2"><a href="pruning.html#cb26-2"></a>% [<span class="dv">1</span>] <span class="fl">-2.961312</span> <span class="fl">-2.961234</span> <span class="fl">-2.961299</span> <span class="fl">-2.961165</span> <span class="fl">-2.961223</span> <span class="fl">-2.959457</span></span></code></pre></div>
+<p>While the <span class="math inline">\(\Lambda(t)\)</span> values are available for extraction they are most useful when plotted via the <code>vis_DMPrune_LambdaPath</code> function, which takes a <code>TRN</code> object (whose <span class="math inline">\(\Lambda\)</span>-path has been previously set) as input:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="pruning.html#cb27-1"></a><span class="co">## Visualize the SHGR Lambda-path </span></span>
+<span id="cb27-2"><a href="pruning.html#cb27-2"></a>TopoRNet<span class="op">::</span><span class="kw">vis_DMPrune_LambdaPath</span>(<span class="dt">TRN =</span> SHGR.trn)</span>
+<span id="cb27-3"><a href="pruning.html#cb27-3"></a>% <span class="op">!!</span><span class="st"> </span>Lambda Path Visualization <span class="op">!!</span></span>
+<span id="cb27-4"><a href="pruning.html#cb27-4"></a>% <span class="op">----------------------------------------------------------</span></span>
+<span id="cb27-5"><a href="pruning.html#cb27-5"></a>% <span class="kw">max</span>(Lambda) =<span class="st"> </span><span class="fl">-2.2</span> found at step =<span class="st"> </span><span class="dv">467</span></span>
+<span id="cb27-6"><a href="pruning.html#cb27-6"></a>% Lambda path intersects its starting value at step =<span class="st"> </span><span class="dv">640</span></span>
+<span id="cb27-7"><a href="pruning.html#cb27-7"></a>% Change points identified at steps<span class="op">:</span><span class="st"> </span></span>
+<span id="cb27-8"><a href="pruning.html#cb27-8"></a>% <span class="dv">268</span>	<span class="dv">577</span>	<span class="dv">640</span>	<span class="dv">673</span>	</span>
+<span id="cb27-9"><a href="pruning.html#cb27-9"></a>% <span class="op">----------------------------------------------------------</span></span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-27"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-27-1.png" alt="SHGR $\Lambda$ Path" width="672" />
+<p class="caption">
+Figure 4.4: SHGR <span class="math inline">\(\Lambda\)</span> Path
+</p>
+</div>
+<p><code>vis_DMPrune_LambdaPath</code> also produces plots of the first and second-order finite differences of the <span class="math inline">\(\Lambda\)</span>-path to further highlight points of (rapid) change in the path. Additionally, several time steps of interest (discussed below) are marked on the path as blue and green points.</p>
+<p>The idea behind DM-Pruning is to successively remove CADJ edges until the DM-likelihood begins to noticeably deteriorate. The SHGR <span class="math inline">\(\Lambda\)</span>-path displays a visible increase in likelihood as edges are removed, until step <span class="math inline">\(t = 467\)</span> (marked with a blue point). In statistics, parameterizations are often governed by the <span class="math inline">\(\arg \max\)</span> of a model likelihood and the DM-Prune procedure recommends this step as a focal point for pruning decisions as well. Removing low-quality edges from the graph <em>should</em> improve the DM model fit (assuming the model is correctly specified), so the likelihood peak visible above is not entirely unsurprising. However, as work is ongoing to determine the fidelity and responsiveness of the DM-likelihood to salient cluster structure, alternative suggestions for an optimal pruning step are also marked in green. These alternative suggestions arise from <a href="https://www.jstor.org/stable/2965722?seq=1">variance changepoint analysis</a> of the <span class="math inline">\(\Lambda\)</span>-path and are intended to highlight pruning steps which precede larger swings in the path, signaling significant model changes. For the SHGR SOM, a conservative approach would stop pruning around step <span class="math inline">\(t = 268\)</span>, while a more aggressive approach would continue pruning until step <span class="math inline">\(t = 577\)</span>. For now, we suggest human assessment of several pruned CADJ graphs in this range. Below, we DM-Prune the CADJ graph at each of the suggested steps and compare the resulting CONNvis:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="pruning.html#cb28-1"></a><span class="co">## DM-Prune at t=268 </span></span>
+<span id="cb28-2"><a href="pruning.html#cb28-2"></a>SHGR.trn<span class="op">$</span><span class="kw">DMPrune_CADJ_step</span>(<span class="dv">268</span>)</span>
+<span id="cb28-3"><a href="pruning.html#cb28-3"></a>% Set <span class="dv">571</span> CADJ edges inactive.</span>
+<span id="cb28-4"><a href="pruning.html#cb28-4"></a><span class="co">## Propagate CADJ pruning to the CONN graph </span></span>
+<span id="cb28-5"><a href="pruning.html#cb28-5"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_CADJ</span>()</span>
+<span id="cb28-6"><a href="pruning.html#cb28-6"></a><span class="co">## View the resulting CONNvis </span></span>
+<span id="cb28-7"><a href="pruning.html#cb28-7"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb28-8"><a href="pruning.html#cb28-8"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CONNvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb28-9"><a href="pruning.html#cb28-9"></a><span class="co">## Restore all pruned edges </span></span>
+<span id="cb28-10"><a href="pruning.html#cb28-10"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CADJ_edges</span>()</span>
+<span id="cb28-11"><a href="pruning.html#cb28-11"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CONN_edges</span>()</span>
+<span id="cb28-12"><a href="pruning.html#cb28-12"></a></span>
+<span id="cb28-13"><a href="pruning.html#cb28-13"></a><span class="co">## DM-Prune at t=467</span></span>
+<span id="cb28-14"><a href="pruning.html#cb28-14"></a>SHGR.trn<span class="op">$</span><span class="kw">DMPrune_CADJ_step</span>(<span class="dv">467</span>)</span>
+<span id="cb28-15"><a href="pruning.html#cb28-15"></a>% Set <span class="dv">1250</span> CADJ edges inactive.</span>
+<span id="cb28-16"><a href="pruning.html#cb28-16"></a><span class="co">## Propagate CADJ pruning to the CONN graph </span></span>
+<span id="cb28-17"><a href="pruning.html#cb28-17"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_CADJ</span>()</span>
+<span id="cb28-18"><a href="pruning.html#cb28-18"></a><span class="co">## View the resulting CONNvis </span></span>
+<span id="cb28-19"><a href="pruning.html#cb28-19"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb28-20"><a href="pruning.html#cb28-20"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CONNvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb28-21"><a href="pruning.html#cb28-21"></a><span class="co">## Restore all pruned edges </span></span>
+<span id="cb28-22"><a href="pruning.html#cb28-22"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CADJ_edges</span>()</span>
+<span id="cb28-23"><a href="pruning.html#cb28-23"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CONN_edges</span>()</span>
+<span id="cb28-24"><a href="pruning.html#cb28-24"></a></span>
+<span id="cb28-25"><a href="pruning.html#cb28-25"></a><span class="co">## DM-Prune at t=577</span></span>
+<span id="cb28-26"><a href="pruning.html#cb28-26"></a>SHGR.trn<span class="op">$</span><span class="kw">DMPrune_CADJ_step</span>(<span class="dv">577</span>)</span>
+<span id="cb28-27"><a href="pruning.html#cb28-27"></a>% Set <span class="dv">1557</span> CADJ edges inactive.</span>
+<span id="cb28-28"><a href="pruning.html#cb28-28"></a><span class="co">## Propagate CADJ pruning to the CONN graph </span></span>
+<span id="cb28-29"><a href="pruning.html#cb28-29"></a>SHGR.trn<span class="op">$</span><span class="kw">prune_CONN_CADJ</span>()</span>
+<span id="cb28-30"><a href="pruning.html#cb28-30"></a><span class="co">## View the resulting CONNvis </span></span>
+<span id="cb28-31"><a href="pruning.html#cb28-31"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb28-32"><a href="pruning.html#cb28-32"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CONNvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb28-33"><a href="pruning.html#cb28-33"></a><span class="co">## Restore all pruned edges </span></span>
+<span id="cb28-34"><a href="pruning.html#cb28-34"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CADJ_edges</span>()</span>
+<span id="cb28-35"><a href="pruning.html#cb28-35"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CONN_edges</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-28-1.png" alt="DM-Pruned SHGR CONNvis" width="32%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-28-2.png" alt="DM-Pruned SHGR CONNvis" width="32%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-28-3.png" alt="DM-Pruned SHGR CONNvis" width="32%" />
+<p class="caption">
+Figure 4.5: DM-Pruned SHGR CONNvis
+</p>
+</div>
+<p>The conservative pruning at <span class="math inline">\(t = 268\)</span> is very similar to the grid-pruned CONN discussed above, failing to properly separate clusters F &amp; M, K &amp; N and D &amp; T, while the aggressive pruning at <span class="math inline">\(t=577\)</span> has left the graph mostly disconnected into tiny neuron islands. The pruning at <span class="math inline">\(t^* = 467 = \arg\max \Lambda(t)\)</span> has produced a graph with most of these problems rectified, except for one boundary violation between clusters F &amp; M.</p>
+<p>Note that in each group of function calls above we have first pruned the CADJ graph via the method <code>DMPrune_CADJ_step</code>, which takes as input a step <span class="math inline">\(t\)</span> and sets all CADJ edges whose <span class="math inline">\(\mu\)</span>-rank is <span class="math inline">\(&lt;\)</span> as inactive. The set of CONN edges corresponding to the resulting set of inactive CADJ edges in each case is inactived via <code>prune_CONN_CADJ</code>, and the CONNvis of the pruned CONN is visualized. This was done in order to view CONNvis, which is the more common visualization but only operates on the symmetric CONN graph. The CADJvis of the above could have been viewed instead, if preferred:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="pruning.html#cb29-1"></a><span class="co">## DM-Prune at t=268 </span></span>
+<span id="cb29-2"><a href="pruning.html#cb29-2"></a>SHGR.trn<span class="op">$</span><span class="kw">DMPrune_CADJ_step</span>(<span class="dv">268</span>)</span>
+<span id="cb29-3"><a href="pruning.html#cb29-3"></a>% Set <span class="dv">571</span> CADJ edges inactive.</span>
+<span id="cb29-4"><a href="pruning.html#cb29-4"></a><span class="co">## View the resulting CADJvis </span></span>
+<span id="cb29-5"><a href="pruning.html#cb29-5"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb29-6"><a href="pruning.html#cb29-6"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CADJvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb29-7"><a href="pruning.html#cb29-7"></a><span class="co">## Restore all pruned edges </span></span>
+<span id="cb29-8"><a href="pruning.html#cb29-8"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CADJ_edges</span>()</span>
+<span id="cb29-9"><a href="pruning.html#cb29-9"></a></span>
+<span id="cb29-10"><a href="pruning.html#cb29-10"></a><span class="co">## DM-Prune at t=467</span></span>
+<span id="cb29-11"><a href="pruning.html#cb29-11"></a>SHGR.trn<span class="op">$</span><span class="kw">DMPrune_CADJ_step</span>(<span class="dv">467</span>)</span>
+<span id="cb29-12"><a href="pruning.html#cb29-12"></a>% Set <span class="dv">1250</span> CADJ edges inactive.</span>
+<span id="cb29-13"><a href="pruning.html#cb29-13"></a><span class="co">## View the resulting CADJvis </span></span>
+<span id="cb29-14"><a href="pruning.html#cb29-14"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb29-15"><a href="pruning.html#cb29-15"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CADJvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb29-16"><a href="pruning.html#cb29-16"></a><span class="co">## Restore all pruned edges </span></span>
+<span id="cb29-17"><a href="pruning.html#cb29-17"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CADJ_edges</span>()</span>
+<span id="cb29-18"><a href="pruning.html#cb29-18"></a></span>
+<span id="cb29-19"><a href="pruning.html#cb29-19"></a><span class="co">## DM-Prune at t=577</span></span>
+<span id="cb29-20"><a href="pruning.html#cb29-20"></a>SHGR.trn<span class="op">$</span><span class="kw">DMPrune_CADJ_step</span>(<span class="dv">577</span>)</span>
+<span id="cb29-21"><a href="pruning.html#cb29-21"></a>% Set <span class="dv">1557</span> CADJ edges inactive.</span>
+<span id="cb29-22"><a href="pruning.html#cb29-22"></a><span class="co">## View the resulting CADJvis </span></span>
+<span id="cb29-23"><a href="pruning.html#cb29-23"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">text.cex =</span> <span class="dv">0</span>)</span>
+<span id="cb29-24"><a href="pruning.html#cb29-24"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_CADJvis</span>(<span class="dt">SOM =</span> SHGR.som, <span class="dt">TRN =</span> SHGR.trn, <span class="dt">add =</span> T)</span>
+<span id="cb29-25"><a href="pruning.html#cb29-25"></a><span class="co">## Restore all pruned edges </span></span>
+<span id="cb29-26"><a href="pruning.html#cb29-26"></a>SHGR.trn<span class="op">$</span><span class="kw">restore_CADJ_edges</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-29-1.png" alt="DM-Pruned SHGR CADJvis" width="32%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-29-2.png" alt="DM-Pruned SHGR CADJvis" width="32%" /><img src="TopoRNet.README_files/figure-html/unnamed-chunk-29-3.png" alt="DM-Pruned SHGR CADJvis" width="32%" />
+<p class="caption">
+Figure 4.6: DM-Pruned SHGR CADJvis
+</p>
+</div>
+<p>Note also that after each round of pruning all CADJ and CONN edges were restored. This was not necessary in this case as DM-Pruning is hierarchical, meaning that the pruned graph at step <span class="math inline">\(t_2\)</span> is a sub-graph of the graph pruned at <span class="math inline">\(t_1\)</span> if <span class="math inline">\(t_2 &gt; t_1\)</span>. In general, however, the effects of pruning a TRN (via any of the <code>prune_CADJ_*</code> or <code>prune_CONN_*</code> methods) should be reversed prior to re-pruning with a different set of criteria for proper comparison.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-TaylorMerenyi2020">
+<p>[9] J. Taylor and E. Merényi, “A probabilistic method for pruning cadj graphs with applications to som clustering,” in <em>Advances in self-organizing maps, learning vector quantization, clustering and data visualization</em>, 2020, pp. 44–54.</p>
+</div>
+<div id="ref-TaylorMerenyi2020b">
+<p>[10] J. Taylor and E. Merényi, “DM-pruning cadj graphs for som clustering,” <em>Neural Computing and Applications</em>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="topology-preservation-measures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TopoRNet.README.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

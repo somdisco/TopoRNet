@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>TopoRNet</title>
+  <meta name="description" content="TopoRNet" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="TopoRNet" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="TopoRNet" />
+  
+  
+  
+
+<meta name="author" content="Josh Taylor" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="installation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a></li>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
+<li class="chapter" data-level="3" data-path="visualizations.html"><a href="visualizations.html"><i class="fa fa-check"></i><b>3</b> Visualizations</a><ul>
+<li class="chapter" data-level="3.1" data-path="visualizations.html"><a href="visualizations.html#topoview"><i class="fa fa-check"></i><b>3.1</b> TopoView</a></li>
+<li class="chapter" data-level="3.2" data-path="visualizations.html"><a href="visualizations.html#connvis"><i class="fa fa-check"></i><b>3.2</b> CONNvis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pruning.html"><a href="pruning.html"><i class="fa fa-check"></i><b>4</b> Pruning</a><ul>
+<li class="chapter" data-level="4.1" data-path="pruning.html"><a href="pruning.html#grid-pruning"><i class="fa fa-check"></i><b>4.1</b> Grid Pruning</a></li>
+<li class="chapter" data-level="4.2" data-path="pruning.html"><a href="pruning.html#dm-prune"><i class="fa fa-check"></i><b>4.2</b> DM-Prune</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html"><i class="fa fa-check"></i><b>5</b> Topology Preservation Measures</a><ul>
+<li class="chapter" data-level="5.1" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-product"><i class="fa fa-check"></i><b>5.1</b> Topographic Product</a></li>
+<li class="chapter" data-level="5.2" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#differential-topographic-function"><i class="fa fa-check"></i><b>5.2</b> Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.3" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#weighted-differential-topographic-function"><i class="fa fa-check"></i><b>5.3</b> Weighted Differential Topographic Function</a></li>
+<li class="chapter" data-level="5.4" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#topographic-function"><i class="fa fa-check"></i><b>5.4</b> Topographic Function</a></li>
+<li class="chapter" data-level="5.5" data-path="topology-preservation-measures.html"><a href="topology-preservation-measures.html#calculating-tpms-with-topornet"><i class="fa fa-check"></i><b>5.5</b> Calculating TPMs with TopoRNet</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TopoRNet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">TopoRNet</h1>
+<h2 class="subtitle"><em>Analysis and Visualization of Topology Representing Networks</em></h2>
+<p class="author"><em>Josh Taylor</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<p><code>TopoRNet</code> is an R package providing a C++ template for manipulation of and computation with a Topology Representing Network (or TRN, which is also introduced in this document). As TRNs represent mappings from an <strong>input space</strong> to an <strong>output space</strong> they possess an additional layer of complexity when compared to standard mathematical graph representations. While several R packages for graph analysis currently exist (the <a href="https://igraph.org/r/"><code>igraph</code></a> package being the most popular) none (inherently) contain the machinery required to properly handle this additional complexity. <code>TopoRNet</code> addresses this shortcoming in the R community by providing the following functionality which, to our knowledge, no other package does:</p>
+<ul>
+<li>A templated C++ class to facilitate storage of TRNs and derivative products.</li>
+<li>Calculation of the <strong>Topographic Product</strong> and several <strong>Topographic Functions.</strong> Collectively, these Topology Preserving Measures (TPMs) provide a metric for assessing the <em>degree</em> to which topology is preserved, when it is represented by the TRN.</li>
+<li>The <strong>CONNvis</strong> visualization (and calculation of its required statistics) which aides human and automated cluster inference from TRNs.</li>
+<li>Intelligent sparsification of a TRN (which improves the quality of cluster extraction) via its CONNvis statistics and the recently introduced <code>DM-Prune</code> methodology.<br />
+</li>
+<li>C++ implementations of the above (based on <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a> and <a href="https://cran.r-project.org/web/packages/RcppArmadillo/index.html">RcppArmadillo</a>)</li>
+<li>Optional parallel computation of the above (as applicable, via <a href="https://cran.r-project.org/web/packages/RcppParallel/index.html">RcppParallel</a>)</li>
+</ul>
+<p>While a TRN can arise from several sources, it is most commonly a product of unsupervised manifold learning via the Self-Organizing Map. As such, the R package <code>SOMDisco</code> will also be utilized in this documentation. These packages are intended to work together to facilitate SOM-based cluster discovery. A 20x20 hexagonal SOM which has learned the 100-dimensional, 20-class cov500-4000 <code>SHGRWalk</code> hyperspectral image cube (more information <a href="https://somdisco.github.io/SHGRWalk/output/index.html">here</a>) has been included with <code>TopoRNet</code> for example purposes in the variable <code>SHGR.SOMList</code>. The dimension-wise inner 95% quantile range of each of the 20 data classes (denoted by letters “A” - “T”) is given below:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-1-1.png" alt="SHGRWalk 20-class Class-wise Statistics" width="672" />
+<p class="caption">
+Figure 0.1: SHGRWalk 20-class Class-wise Statistics
+</p>
+</div>
+<p>The learned SHGR SOM shows good organization when the training data labels are propagated to each neuron by the SOM mapping:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="co">## Load the learned SOM included with TopoRNet</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a>SHGR.som =<span class="st"> </span>SOMDisco<span class="op">::</span>SOM<span class="op">$</span><span class="kw">new</span>() </span>
+<span id="cb1-3"><a href="index.html#cb1-3"></a>SHGR.som<span class="op">$</span><span class="kw">load_list</span>(TopoRNet<span class="op">::</span>SHGR.SOMList)</span>
+<span id="cb1-4"><a href="index.html#cb1-4"></a>% <span class="op">++</span><span class="st"> </span>calculating <span class="kw">lattice</span> (x,y) coordinates ... done</span>
+<span id="cb1-5"><a href="index.html#cb1-5"></a>% <span class="op">++</span><span class="st"> </span>calculating neuron lattice adjacencies ... done</span>
+<span id="cb1-6"><a href="index.html#cb1-6"></a>% <span class="op">++</span><span class="st"> </span>calculating geodesic lattice distances between neurons ... done</span>
+<span id="cb1-7"><a href="index.html#cb1-7"></a>% <span class="op">++</span><span class="st"> </span>assigning geodesic lattice distances to distlist ... done</span>
+<span id="cb1-8"><a href="index.html#cb1-8"></a>% <span class="op">++</span><span class="st"> </span>calculating lattice tile vertices ... done</span>
+<span id="cb1-9"><a href="index.html#cb1-9"></a>% Storing the annealing schedule as<span class="op">:</span></span>
+<span id="cb1-10"><a href="index.html#cb1-10"></a>% t	alpha	beta	gamma	sigma</span>
+<span id="cb1-11"><a href="index.html#cb1-11"></a>% <span class="dv">16384</span>	<span class="fl">0.5</span>	<span class="fl">0.05</span>	<span class="fl">0.005</span>	<span class="dv">3</span></span>
+<span id="cb1-12"><a href="index.html#cb1-12"></a>% <span class="dv">81920</span>	<span class="fl">0.25</span>	<span class="fl">0.025</span>	<span class="fl">0.0025</span>	<span class="dv">2</span></span>
+<span id="cb1-13"><a href="index.html#cb1-13"></a>% <span class="dv">163840</span>	<span class="fl">0.1</span>	<span class="fl">0.01</span>	<span class="fl">0.001</span>	<span class="dv">1</span></span>
+<span id="cb1-14"><a href="index.html#cb1-14"></a>% <span class="dv">409600</span>	<span class="fl">0.05</span>	<span class="fl">0.005</span>	<span class="fl">0.0005</span>	<span class="dv">1</span></span>
+<span id="cb1-15"><a href="index.html#cb1-15"></a>% <span class="dv">1638400</span>	<span class="fl">0.01</span>	<span class="fl">0.001</span>	<span class="fl">0.0001</span>	<span class="dv">1</span></span>
+<span id="cb1-16"><a href="index.html#cb1-16"></a><span class="co">## Visualize it </span></span>
+<span id="cb1-17"><a href="index.html#cb1-17"></a>SOMDisco<span class="op">::</span><span class="kw">vis_som_label</span>(<span class="dt">SOM=</span>SHGR.som, <span class="dt">text.cex =</span> <span class="fl">0.8</span>, <span class="dt">text.font =</span> <span class="dv">2</span>, <span class="dt">rprop =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="TopoRNet.README_files/figure-html/unnamed-chunk-2-1.png" alt="Learned SHGRWalk SOM Lattice" width="672" />
+<p class="caption">
+Figure 0.2: Learned SHGRWalk SOM Lattice
+</p>
+</div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TopoRNet.README.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
